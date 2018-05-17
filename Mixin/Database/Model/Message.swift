@@ -105,7 +105,7 @@ extension Message {
     }
 
     static func createMessage(mediaData: TransferAttachmentData, data: BlazeMessageData) -> Message {
-        let mediaStatus = data.category.hasSuffix("_DATA") ? MediaStatus.CANCELED.rawValue : MediaStatus.PENDING.rawValue
+        let mediaStatus = data.category.hasSuffix("_DATA") || data.category.hasSuffix("_VIDEO") ? MediaStatus.CANCELED.rawValue : MediaStatus.PENDING.rawValue
         return Message(messageId: data.messageId, conversationId: data.conversationId, userId: data.userId, category: data.category, content: mediaData.attachmentId, mediaUrl: nil, mediaMineType: mediaData.mineType, mediaSize: mediaData.size, mediaDuration: nil, mediaWidth: mediaData.width, mediaHeight: mediaData.height, mediaHash: nil, mediaKey: mediaData.key, mediaDigest: mediaData.digest, mediaStatus: mediaStatus, thumbImage: mediaData.thumbnail, status: MessageStatus.DELIVERED.rawValue, action: nil, participantId: nil, snapshotId: nil, name: mediaData.name, albumId: nil, sharedUserId: nil, createdAt: data.createdAt)
     }
 

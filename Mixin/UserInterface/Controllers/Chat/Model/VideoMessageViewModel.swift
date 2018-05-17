@@ -1,15 +1,15 @@
 import UIKit
 
-class PhotoMessageViewModel: PhotoRepresentableMessageViewModel, AttachmentLoadingViewModel {
-    
-    var progress: Double?
+class VideoMessageViewModel: PhotoRepresentableMessageViewModel, AttachmentLoadingViewModel {
 
+    var progress: Double?
+    
     var automaticallyLoadsAttachment: Bool {
-        return mediaStatus == MediaStatus.PENDING.rawValue && !messageIsSentByMe
+        return false
     }
     
     var showPlayIconAfterFinished: Bool {
-        return false
+        return true
     }
     
     override init(message: MessageItem, style: Style, fits layoutWidth: CGFloat) {
@@ -24,21 +24,21 @@ class PhotoMessageViewModel: PhotoRepresentableMessageViewModel, AttachmentLoadi
         MessageDAO.shared.updateMediaStatus(messageId: message.messageId, status: .PENDING, conversationId: message.conversationId)
         let job: UploadOrDownloadJob
         if messageIsSentByMe {
-            job = AttachmentUploadJob(message: Message.createMessage(message: message))
+            job = VideoUploadJob(message: Message.createMessage(message: message))
         } else {
-            job = AttachmentDownloadJob(messageId: message.messageId)
+            job = VideoDownloadJob(message: Message.createMessage(message: message))
         }
-        ConcurrentJobQueue.shared.addJob(job: job)
+        FileJobQueue.shared.addJob(job: job)
     }
     
     func cancelAttachmentLoading(markMediaStatusCancelled: Bool) {
         let jobId: String
         if messageIsSentByMe {
-            jobId = AttachmentUploadJob.jobId(messageId: message.messageId)
+            jobId = VideoUploadJob.jobId(messageId: message.messageId)
         } else {
-            jobId = AttachmentDownloadJob.jobId(messageId: message.messageId)
+            jobId = VideoDownloadJob.jobId(messageId: message.messageId)
         }
-        ConcurrentJobQueue.shared.cancelJob(jobId: jobId)
+        FileJobQueue.shared.cancelJob(jobId: jobId)
         if markMediaStatusCancelled {
             MessageDAO.shared.updateMediaStatus(messageId: message.messageId, status: .CANCELED, conversationId: message.conversationId)
         }

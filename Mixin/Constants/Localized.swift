@@ -146,6 +146,7 @@ public class Localized {
     public static let CHAT_SEND_FILE_FAILED = LocalizedString("chat_send_file_failed", comment: "Failed to send file")
     public static let CHAT_MENU_CAMERA = LocalizedString("chat_menu_camera", comment: "Camera")
     public static let CHAT_MENU_PHOTO = LocalizedString("chat_menu_photo", comment: "Photo")
+    public static let CHAT_MENU_VIDEO = LocalizedString("chat_menu_video", comment: "Video")
     public static let CHAT_MENU_FILE = LocalizedString("chat_menu_file", comment: "File")
     public static let CHAT_MENU_TRANSFER = LocalizedString("chat_menu_transfer", comment: "Transfer")
     public static let CHAT_MENU_CONTACT = LocalizedString("chat_menu_contact", comment: "Contact")
@@ -384,6 +385,7 @@ public class Localized {
     public static let NOTIFICATION_CONTENT_FEE = LocalizedString("notification_content_fee", comment: "[Fee]")
     public static let NOTIFICATION_CONTENT_WITHDRAWAL = LocalizedString("notification_content_withdrawal", comment: "[Withdrawal]")
     public static let NOTIFICATION_CONTENT_REBATE = LocalizedString("notification_content_rebate", comment: "[Rebate]")
+    public static let NOTIFICATION_CONTENT_VIDEO = LocalizedString("notification_content_video", comment: "[Video]")
 
     // About
     public static let ABOUT_LOGOUT_TITLE = LocalizedString("about_logout_title", comment: "Do you want to log out?")
